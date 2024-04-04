@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Expense Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/framework7/5.7.9/css/framework7.bundle.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Framework7 App root element -->
+    <div id="app">
+        <!-- Views/Tabs container -->
+        <div class="views">
+            <!-- View -->
+            <div class="view view-main">
+                <!-- Pages container -->
+                <div class="pages">
+                    <!-- Login Page -->
+                    <div class="page" data-name="login">
+                        <div class="page-content login-screen-content">
+                            <div class="login-screen-title">Login</div>
+                            <form @submit.prevent="login">
+                                <div class="list">
+                                    <ul>
+                                        <li class="item-content item-input">
+                                            <div class="item-inner">
+                                                <div class="item-title item-label">ID</div>
+                                                <div class="item-input-wrap">
+                                                    <input type="text" v-model="loginData.id" placeholder="Your ID" required>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="item-content item-input">
+                                            <div class="item-inner">
+                                                <div class="item-title item-label">Password</div>
+                                                <div class="item-input-wrap">
+                                                    <input type="password" v-model="loginData.password" placeholder="Your password" required>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="login-screen-button">
+                                    <button type="submit" class="button button-fill">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Main Page -->
+                    <div class="page" data-name="home">
+                        <div class="page-content">
+                            <div class="block-title">Enter Expense</div>
+                            <div class="list">
+                                <ul>
+                                    <li class="item-content item-input">
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">Amount</div>
+                                            <div class="item-input-wrap">
+                                                <input type="number" v-model="expenseData.amount" placeholder="Enter amount" required>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content item-input">
+                                        <div class="item-inner">
+                                            <div class="item-title item-label">Date</div>
+                                            <div class="item-input-wrap">
+                                                <input type="date" v-model="expenseData.date" required>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="row">
+                                <div class="col"><button @click="addIncome" class="button button-fill">Income</button></div>
+                                <div class="col"><button @click="addExpense" class="button button-fill">Expense</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framework7/5.7.9/js/framework7.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+        // Vue.js app
+        new Vue({
+            el: '#app',
+            data: {
+                loginData: {
+                    id: '',
+                    password: ''
+                },
+                expenseData: {
+                    amount: '',
+                    date: ''
+                }
+            },
+            methods: {
+                login() {
+                    // Handle login logic here
+                    console.log('Logged in');
+                    // Redirect to home page after login
+                    app.views.main.router.navigate('/home/');
+                },
+                addIncome() {
+                    // Handle income addition logic here
+                    console.log('Added income:', this.expenseData.amount, 'on', this.expenseData.date);
+                },
+                addExpense() {
+                    // Handle expense addition logic here
+                    console.log('Added expense:', this.expenseData.amount, 'on', this.expenseData.date);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
